@@ -1,0 +1,17 @@
+name: Test
+on:
+  push:
+  workflow_dispatch:
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [macos-11, macos-12, macos-13]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - run: sw_vers
+      - run: xcode-select --print-path
+      - run: uname -a
+      - run: sysctl -a
+      - run: system_profiler -detailLevel full -xml > details.spx
+      

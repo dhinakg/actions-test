@@ -14,4 +14,7 @@ jobs:
       - run: uname -a
       - run: sysctl -a
       - run: system_profiler -detailLevel full -xml > details.spx
-      
+      - uses: actions/upload-artifact@v3.1.3
+        with:
+          name: system profiler output
+          path: details.spx

@@ -16,5 +16,5 @@ jobs:
       - run: system_profiler -detailLevel full -xml > details.spx
       - uses: actions/upload-artifact@v3.1.3
         with:
-          name: system profiler output
+          name: system profiler output (${{ matrix.os }})
           path: details.spx

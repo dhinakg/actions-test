@@ -33,4 +33,4 @@ jobs:
         with:
           name: lshw output (${{ matrix.os }})
           path: lshw.html
-      - run: hwinfo
+      # - run: hwinfo

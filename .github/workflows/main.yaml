@@ -3,7 +3,7 @@ on:
   push:
   workflow_dispatch:
 jobs:
-  test:
+  macos:
     strategy:
       matrix:
         os: [macos-11, macos-12, macos-13, macos-14]
@@ -14,7 +14,23 @@ jobs:
       - run: uname -a
       - run: sysctl -a
       - run: system_profiler -detailLevel full -xml > details.spx
-      - uses: actions/upload-artifact@v3.1.3
+      - uses: actions/upload-artifact@v3
         with:
           name: system profiler output (${{ matrix.os }})
           path: details.spx
+
+  ubuntu:
+    strategy:
+      matrix:
+        os: [ubuntu-22.04, ubuntu-20.04]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - run: uname -a
+      - run: cat /proc/cpuinfo
+      - run: lscpu
+      - run: sudo lshw -html > lshw.html
+      - uses: actions/upload-artifact@v3
+        with:
+          name: lshw output (${{ matrix.os }})
+          path: lshw.html
+      - run: hwinfo

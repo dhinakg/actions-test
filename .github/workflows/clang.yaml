@@ -14,3 +14,4 @@ jobs:
       - run: sw_vers
       - run: xcode-select --print-path
       - run: clang --version
+      - run: ./clang-test.sh

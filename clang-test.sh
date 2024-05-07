@@ -3,6 +3,6 @@
 for i in /Applications/Xcode_*.app; do
     echo "$i"
     export DEVELOPER_DIR="$i/Contents/Developer"
-    clang --version
-    clang -ivfsstatcache
+    clang --version || true
+    clang -ivfsstatcache || true
 done

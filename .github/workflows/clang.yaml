@@ -1,0 +1,16 @@
+name: Clang
+on:
+  push:
+  workflow_dispatch:
+jobs:
+  macos:
+    strategy:
+      matrix:
+        os: [macos-11, macos-12, macos-13, macos-14]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - run: sw_vers
+      - run: xcode-select --print-path
+      - run: clang --version

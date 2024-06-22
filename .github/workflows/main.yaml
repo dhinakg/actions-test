@@ -14,7 +14,8 @@ jobs:
       - run: uname -a
       - run: sysctl -a
       - run: system_profiler -detailLevel full -xml > details.spx
-      - uses: actions/upload-artifact@v3
+      - run: df -h
+      - uses: actions/upload-artifact@v4
         with:
           name: system profiler output (${{ matrix.os }})
           path: details.spx
@@ -22,14 +23,15 @@ jobs:
   ubuntu:
     strategy:
       matrix:
-        os: [ubuntu-22.04, ubuntu-20.04]
+        os: [ubuntu-24.04, ubuntu-22.04, ubuntu-20.04]
     runs-on: ${{ matrix.os }}
     steps:
       - run: uname -a
       - run: cat /proc/cpuinfo
       - run: lscpu
       - run: sudo lshw -html > lshw.html
-      - uses: actions/upload-artifact@v3
+      - run: df -h
+      - uses: actions/upload-artifact@v4
         with:
           name: lshw output (${{ matrix.os }})
           path: lshw.html

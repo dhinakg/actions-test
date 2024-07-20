@@ -24,7 +24,7 @@ jobs:
           brew tap teamookla/speedtest
           brew update
           brew install speedtest
-      - run: speedtest
+      - run: speedtest --accept-license
 
   ubuntu:
     strategy:
@@ -46,4 +46,4 @@ jobs:
         run: |
           curl -s https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.deb.sh | sudo bash
           sudo apt install speedtest -y
-      - run: speedtest
+      - run: speedtest --accept-license

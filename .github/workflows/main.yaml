@@ -19,6 +19,12 @@ jobs:
         with:
           name: system profiler output (${{ matrix.os }})
           path: details.spx
+      - name: install speedtest
+        run: |
+          brew tap teamookla/speedtest
+          brew update
+          brew install speedtest
+      - run: speedtest
 
   ubuntu:
     strategy:
@@ -36,3 +42,8 @@ jobs:
           name: lshw output (${{ matrix.os }})
           path: lshw.html
       # - run: hwinfo
+      - name: install speedtest
+        run: |
+          curl -s https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.deb.sh | sudo bash
+          sudo apt install speedtest -y
+      - run: speedtest

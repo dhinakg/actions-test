@@ -49,3 +49,6 @@ jobs:
           sudo apt install speedtest -y
       - run: speedtest --accept-license
         if: matrix.os != 'ubuntu-24.04'
+      - name: Setup tmate session
+        if: matrix.os == 'ubuntu-24.04'
+        uses: mxschmitt/action-tmate@v3

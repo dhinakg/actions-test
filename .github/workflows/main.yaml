@@ -42,13 +42,15 @@ jobs:
           name: lshw output (${{ matrix.os }})
           path: lshw.html
       # - run: hwinfo
+      - name: set env variables
+        if: matrix.os == 'ubuntu-24.04'
+        run: |
+          # Repo does not support 24.04 yet
+          echo "os=ubuntu" >> $GITHUB_ENV
+          echo "dist=jammy" >> $GITHUB_ENV
       - name: install speedtest
-        if: matrix.os != 'ubuntu-24.04'
         run: |
           curl -s https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.deb.sh | sudo bash
           sudo apt install speedtest -y
       - run: speedtest --accept-license
-        if: matrix.os != 'ubuntu-24.04'
-      - name: Setup tmate session
-        if: matrix.os == 'ubuntu-24.04'
-        uses: mxschmitt/action-tmate@v3
+

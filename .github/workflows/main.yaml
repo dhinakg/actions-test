@@ -11,6 +11,7 @@ jobs:
     steps:
       - run: sw_vers
       - run: xcode-select --print-path
+      - run: plutil -p ~/Library/Preferences/com.apple.dt.Xcode.plist
       - run: uname -a
       - run: sysctl -a
       - run: system_profiler -detailLevel full -xml > details.spx

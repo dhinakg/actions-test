@@ -96,7 +96,7 @@ jobs:
         run: |
           choco install speedtest -y
           curl.exe -L "https://github.com/pouriyajamshidi/tcping/releases/latest/download/tcping-windows-amd64-static.zip" -o tcping.zip
-          7z -otcping tcping.zip
+          7z -otcping x tcping.zip
           Add-Content "$env:GITHUB_PATH" (Convert-Path tcping)
       - run: speedtest --accept-license
       - run: ping -n 20 1.1.1.1

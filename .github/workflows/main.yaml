@@ -89,7 +89,7 @@ jobs:
         os: [windows-2025, windows-2022, windows-2019]
     runs-on: ${{ matrix.os }}
     steps:
-      - run: curl.exe -v https://mensura.cdn-apple.com/api/v1/gm/config
+      - run: curl https://mensura.cdn-apple.com/api/v1/gm/config
       - name: install speedtest tcping
         run: |
           winget settings --enable LocalManifestFiles

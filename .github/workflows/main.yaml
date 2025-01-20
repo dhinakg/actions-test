@@ -78,6 +78,25 @@ jobs:
       - run: ping -c 20 8.8.8.8 || true
       - run: ping -c 20 updates.cdn-apple.com || true
       - run: tcping -c 20 1.1.1.1 443
+
+  windows:
+    strategy:
+      matrix:
+        os: [windows-2025, windows-2022, windows-2019]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - run: curl.exe https://mensura.cdn-apple.com/api/v1/gm/config
+      - name: install speedtest tcping
+        run: |
+          winget settings --enable LocalManifestFiles
+          winget install --id=Ookla.Speedtest.CLI -e
+          curl -LO 'https://raw.githubusercontent.com/microsoft/winget-pkgs/31a68e3303a70965319c143752261975d8e7989a/manifests/p/pj/tcping/2.7.0/pj.tcping.installer.yaml
+          winget install --manifest pj.tcping.installer.yaml
+      - run: speedtest --accept-license
+      - run: ping -n 20 1.1.1.1
+      - run: ping -n 20 8.8.8.8
+      - run: ping -n 20 updates.cdn-apple.com
+      - run: tcping -c 20 1.1.1.1 443
       - run: tcping -c 20 8.8.8.8 443
       - run: tcping -c 20 updates.cdn-apple.com 443
 

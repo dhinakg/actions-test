@@ -90,8 +90,6 @@ jobs:
         os: [windows-2025, windows-2022, windows-2019]
     runs-on: ${{ matrix.os }}
     steps:
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
       - run: |
           curl -v https://mensura.cdn-apple.com/api/v1/gm/config
         shell: bash

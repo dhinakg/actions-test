@@ -94,7 +94,10 @@ jobs:
           C:\msys64\usr\bin\curl.exe -v https://mensura.cdn-apple.com/api/v1/gm/config
       - name: install winget
         if: matrix.os != 'windows-2025'
-        run: choco install winget-cli -y
+        run: |
+          choco install winget-cli -y
+          $WinGetFolderPath = (Get-ChildItem -Path ([System.IO.Path]::Combine($env:ProgramFiles, 'WindowsApps')) -Filter "Microsoft.DesktopAppInstaller_*_${arch}__8wekyb3d8bbwe" | Sort-Object Name | Select-Object -Last 1).FullName
+          Add-Content "$env:GITHUB_PATH" "$WinGetFolderPath"
       - name: install speedtest tcping
         run: |
           winget settings --enable LocalManifestFiles 

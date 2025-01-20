@@ -92,29 +92,12 @@ jobs:
     steps:
       - run: |
           C:\msys64\usr\bin\curl.exe -v https://mensura.cdn-apple.com/api/v1/gm/config
-      - name: install winget
-        if: matrix.os != 'windows-2025'
-        run: |
-          Install-Script -Name winget-install -Force
-          echo install start
-          winget-install
-          echo install end
-          $WinGetFolderPath = (Get-ChildItem -Path ([System.IO.Path]::Combine($env:ProgramFiles, 'WindowsApps')) -Filter "Microsoft.DesktopAppInstaller_*_x64__8wekyb3d8bbwe" | Sort-Object Name | Select-Object -Last 1).FullName
-          Add-Content "$env:GITHUB_PATH" "$WinGetFolderPath"
-        shell: powershell
       - name: install speedtest tcping
         run: |
-          winget settings --enable LocalManifestFiles 
           choco install speedtest -y
-          mkdir tcping-manifest
-          cd tcping-manifest
-          curl.exe -LO 'https://raw.githubusercontent.com/microsoft/winget-pkgs/31a68e3303a70965319c143752261975d8e7989a/manifests/p/pj/tcping/2.7.0/pj.tcping.installer.yaml'
-          curl.exe -LO 'https://raw.githubusercontent.com/microsoft/winget-pkgs/31a68e3303a70965319c143752261975d8e7989a/manifests/p/pj/tcping/2.7.0/pj.tcping.locale.en-US.yaml'
-          curl.exe -LO 'https://raw.githubusercontent.com/microsoft/winget-pkgs/31a68e3303a70965319c143752261975d8e7989a/manifests/p/pj/tcping/2.7.0/pj.tcping.yaml'
-          cd ..
-          winget install --manifest tcping-manifest --accept-source-agreements --accept-package-agreements
-          Add-Content "$env:GITHUB_PATH" "$env:LOCALAPPDATA\Microsoft\WinGet\Links"
-        shell: powershell
+          curl.exe -L "https://github.com/pouriyajamshidi/tcping/releases/latest/download/tcping-windows-amd64-static.zip" -o tcping.zip
+          7z -otcping tcping.zip
+          Add-Content "$env:GITHUB_PATH" (Convert-Path tcping)
       - run: speedtest --accept-license
       - run: ping -n 20 1.1.1.1
       - run: ping -n 20 8.8.8.8

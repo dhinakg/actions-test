@@ -96,7 +96,7 @@ jobs:
         if: matrix.os != 'windows-2025'
         run: |
           choco install winget-cli -y
-          $WinGetFolderPath = (Get-ChildItem -Path ([System.IO.Path]::Combine($env:ProgramFiles, 'WindowsApps')) -Filter "Microsoft.DesktopAppInstaller_*_${arch}__8wekyb3d8bbwe" | Sort-Object Name | Select-Object -Last 1).FullName
+          $WinGetFolderPath = (Get-ChildItem -Path ([System.IO.Path]::Combine($env:ProgramFiles, 'WindowsApps')) -Filter "Microsoft.DesktopAppInstaller_*_x64__8wekyb3d8bbwe" | Sort-Object Name | Select-Object -Last 1).FullName
           Add-Content "$env:GITHUB_PATH" "$WinGetFolderPath"
       - name: install speedtest tcping
         run: |

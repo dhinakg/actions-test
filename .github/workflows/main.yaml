@@ -77,9 +77,9 @@ jobs:
         run: |
           sudo apt install speedtest /tmp/tcping.deb -y
       - run: speedtest --accept-license
-      - run: ping -c 20 1.1.1.1 || true
-      - run: ping -c 20 8.8.8.8 || true
-      - run: ping -c 20 updates.cdn-apple.com || true
+      # - run: ping -c 20 1.1.1.1 || true
+      # - run: ping -c 20 8.8.8.8 || true
+      # - run: ping -c 20 updates.cdn-apple.com || true
       - run: tcping -c 20 1.1.1.1 443
       - run: tcping -c 20 8.8.8.8 443
       - run: tcping -c 20 updates.cdn-apple.com 443
@@ -99,9 +99,9 @@ jobs:
           7z -otcping x tcping.zip
           Add-Content "$env:GITHUB_PATH" (Convert-Path tcping)
       - run: speedtest --accept-license
-      - run: ping -n 20 1.1.1.1; exit 0
-      - run: ping -n 20 8.8.8.8; exit 0
-      - run: ping -n 20 updates.cdn-apple.com; exit 0
+      # - run: ping -n 20 1.1.1.1; exit 0
+      # - run: ping -n 20 8.8.8.8; exit 0
+      # - run: ping -n 20 updates.cdn-apple.com; exit 0
       - run: tcping -c 20 1.1.1.1 443
       - run: tcping -c 20 8.8.8.8 443
       - run: tcping -c 20 updates.cdn-apple.com 443

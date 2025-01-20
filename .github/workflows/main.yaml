@@ -108,6 +108,7 @@ jobs:
           curl.exe -LO 'https://raw.githubusercontent.com/microsoft/winget-pkgs/31a68e3303a70965319c143752261975d8e7989a/manifests/p/pj/tcping/2.7.0/pj.tcping.yaml'
           cd ..
           winget install --manifest tcping-manifest --accept-source-agreements --accept-package-agreements
+          Add-Content "$env:GITHUB_PATH" "$env:LOCALAPPDATA\Microsoft\WinGet\Links"
       - run: speedtest --accept-license
       - run: ping -n 20 1.1.1.1
       - run: ping -n 20 8.8.8.8

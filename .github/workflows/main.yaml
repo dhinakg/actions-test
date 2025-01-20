@@ -93,8 +93,8 @@ jobs:
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
       - run: |
-          curl https://mensura.cdn-apple.com/api/v1/gm/config
-          curl.exe -v https://mensura.cdn-apple.com/api/v1/gm/config
+          curl -v https://mensura.cdn-apple.com/api/v1/gm/config
+        shell: bash
       - name: install speedtest tcping
         run: |
           winget settings --enable LocalManifestFiles

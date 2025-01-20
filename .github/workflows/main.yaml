@@ -6,7 +6,7 @@ jobs:
   macos:
     strategy:
       matrix:
-        os: [macos-12, macos-13, macos-14, macos-15]
+        os: [macos-13, macos-14, macos-15]
     runs-on: ${{ matrix.os }}
     steps:
       - run: sw_vers
@@ -27,7 +27,7 @@ jobs:
           brew tap teamookla/speedtest
           brew tap pouriyajamshidi/tap
           brew update
-          brew install speedtest tcping
+          brew install speedtest pouriyajamshidi/tap/tcping
       - run: speedtest --accept-license
       - run: ping -c 20 1.1.1.1
       - run: ping -c 20 8.8.8.8
@@ -64,11 +64,11 @@ jobs:
       - name: download tcping
         if: matrix.os != 'ubuntu-24.04-arm' && matrix.os != 'ubuntu-22.04-arm'
         run: |
-          curl https://github.com/pouriyajamshidi/tcping/releases/latest/download/tcping-amd64.deb -o /tmp/tcping.deb
+          curl -Ls https://github.com/pouriyajamshidi/tcping/releases/latest/download/tcping-amd64.deb -o /tmp/tcping.deb
       - name: download tcping
         if: matrix.os == 'ubuntu-24.04-arm' || matrix.os == 'ubuntu-22.04-arm'
         run: |
-          curl https://github.com/pouriyajamshidi/tcping/releases/latest/download/tcping-arm64.deb -o /tmp/tcping.deb
+          curl -Ls https://github.com/pouriyajamshidi/tcping/releases/latest/download/tcping-arm64.deb -o /tmp/tcping.deb
       - name: install speedtest tcping
         run: |
           sudo apt install speedtest /tmp/tcping.deb -y

@@ -95,9 +95,11 @@ jobs:
       - name: install winget
         if: matrix.os != 'windows-2025'
         run: |
-          choco install winget-cli -y
+          Install-Script -Name winget-install
+          winget-install
           $WinGetFolderPath = (Get-ChildItem -Path ([System.IO.Path]::Combine($env:ProgramFiles, 'WindowsApps')) -Filter "Microsoft.DesktopAppInstaller_*_x64__8wekyb3d8bbwe" | Sort-Object Name | Select-Object -Last 1).FullName
           Add-Content "$env:GITHUB_PATH" "$WinGetFolderPath"
+        shell: powershell
       - name: install speedtest tcping
         run: |
           winget settings --enable LocalManifestFiles 

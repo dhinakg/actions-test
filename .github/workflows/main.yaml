@@ -95,8 +95,10 @@ jobs:
       - name: install winget
         if: matrix.os != 'windows-2025'
         run: |
-          Install-Script -Name winget-install
+          Install-Script -Name winget-install -Force
+          echo install start
           winget-install
+          echo install end
           $WinGetFolderPath = (Get-ChildItem -Path ([System.IO.Path]::Combine($env:ProgramFiles, 'WindowsApps')) -Filter "Microsoft.DesktopAppInstaller_*_x64__8wekyb3d8bbwe" | Sort-Object Name | Select-Object -Last 1).FullName
           Add-Content "$env:GITHUB_PATH" "$WinGetFolderPath"
         shell: powershell

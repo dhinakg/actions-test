@@ -93,6 +93,7 @@ jobs:
       - run: |
           C:\msys64\usr\bin\curl.exe -v https://mensura.cdn-apple.com/api/v1/gm/config
       - name: install winget
+        if: matrix.os != 'windows-2025'
         run: |
           Install-Script -Name winget-install
           winget-install

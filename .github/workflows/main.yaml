@@ -92,6 +92,10 @@ jobs:
     steps:
       - run: |
           C:\msys64\usr\bin\curl.exe -v https://mensura.cdn-apple.com/api/v1/gm/config
+      - name: install winget
+        run: |
+          Install-Script -Name winget-install
+          winget-install
       - name: install speedtest tcping
         run: |
           winget settings --enable LocalManifestFiles 

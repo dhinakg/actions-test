@@ -78,6 +78,8 @@ jobs:
       - run: ping -c 20 8.8.8.8 || true
       - run: ping -c 20 updates.cdn-apple.com || true
       - run: tcping -c 20 1.1.1.1 443
+      - run: tcping -c 20 8.8.8.8 443
+      - run: tcping -c 20 updates.cdn-apple.com 443
 
   windows:
     strategy:

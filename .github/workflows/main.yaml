@@ -91,8 +91,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - run: |
-          curl -v https://mensura.cdn-apple.com/api/v1/gm/config
-        shell: bash
+          C:\msys64\usr\bin\curl.exe -v https://mensura.cdn-apple.com/api/v1/gm/config
       - name: install speedtest tcping
         run: |
           winget settings --enable LocalManifestFiles

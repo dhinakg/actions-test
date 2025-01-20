@@ -114,6 +114,7 @@ jobs:
           cd ..
           winget install --manifest tcping-manifest --accept-source-agreements --accept-package-agreements
           Add-Content "$env:GITHUB_PATH" "$env:LOCALAPPDATA\Microsoft\WinGet\Links"
+        shell: powershell
       - run: speedtest --accept-license
       - run: ping -n 20 1.1.1.1
       - run: ping -n 20 8.8.8.8

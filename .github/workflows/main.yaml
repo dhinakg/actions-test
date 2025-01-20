@@ -106,6 +106,7 @@ jobs:
           curl.exe -LO 'https://raw.githubusercontent.com/microsoft/winget-pkgs/31a68e3303a70965319c143752261975d8e7989a/manifests/p/pj/tcping/2.7.0/pj.tcping.installer.yaml'
           curl.exe -LO 'https://raw.githubusercontent.com/microsoft/winget-pkgs/31a68e3303a70965319c143752261975d8e7989a/manifests/p/pj/tcping/2.7.0/pj.tcping.locale.en-US.yaml'
           curl.exe -LO 'https://raw.githubusercontent.com/microsoft/winget-pkgs/31a68e3303a70965319c143752261975d8e7989a/manifests/p/pj/tcping/2.7.0/pj.tcping.yaml'
+          cd ..
           winget install --manifest tcping-manifest --accept-source-agreements --accept-package-agreements
       - run: speedtest --accept-license
       - run: ping -n 20 1.1.1.1
